@@ -1,0 +1,22 @@
+--CREATETABLE
+drop table IKOU_TEMP_TABLE CASCADE CONSTRAINTS PURGE
+           *
+行1でエラーが発生しました。:
+ORA-00942: 表またはビューが存在しません。 
+
+
+
+表が作成されました。
+
+
+索引が作成されました。
+
+
+索引が作成されました。
+
+
+索引が作成されました。
+
+
+コミットが完了しました。
+

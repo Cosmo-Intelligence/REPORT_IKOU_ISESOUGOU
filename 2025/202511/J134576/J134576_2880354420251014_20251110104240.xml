@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Report>
+   <OrderNumber>J134576</OrderNumber>
+   <AccessionNumber>2880354420251014</AccessionNumber>
+   <StudyinstanceUID>1.2.392.200001.2.3.5.778.4.99.4.2880354420251014</StudyinstanceUID>
+   <OrderDateTime>2025/10/14 12:55:50</OrderDateTime>
+   <ReferringDepartmentName>耳鼻咽喉科</ReferringDepartmentName>
+   <ReferringPhysician>かか　かか</ReferringPhysician>
+   <ClinicalInformation>単純</ClinicalInformation>
+   <StudyInformation>2月・10月に起床時のふらつきあり
+右向きの偏倚あり
+内耳・内耳道に異常は？</StudyInformation>
+   <StudyPointTime>2025/11/10 9:41:00</StudyPointTime>
+   <Modality>MR</Modality>
+   <BodyPart>内耳道</BodyPart>
+   <HospitalWard>外来</HospitalWard>
+   <OperatorName>施行者:きき　きき</OperatorName>
+   <OperatorComment></OperatorComment>
+   <Patient>
+      <PatientID>0099999999</PatientID>
+      <PatientName>SUZUKI ICHIRO</PatientName>
+      <PatientKana>スズキ　イチロウ</PatientKana>
+      <PatientKanji>鈴木　一郎</PatientKanji>
+      <PatientSex>2</PatientSex>
+      <PatientBirthDate>1965/07/06</PatientBirthDate>
+      <PatientStatus>1</PatientStatus>
+   </Patient>
+   <Study>
+      <StudyDateTime>2025/11/10 09:40:00</StudyDateTime>
+      <StudyDescription>単純</StudyDescription>
+   </Study>
+   <DiagnosingUser>きき きき</DiagnosingUser>
+   <DiagnosedDateTime>2025/11/10 10:10:14</DiagnosedDateTime>
+   <RevisingUser></RevisingUser>
+   <RevCloseDateTime></RevCloseDateTime>
+   <ApprovingUser>きき きき</ApprovingUser>
+   <ApprovedDateTime>2025/11/10 10:10:17</ApprovedDateTime>
+   <Finding>【臨床診断】　2月・10月に起床時のふらつきあり，右向きの偏倚あり　内耳・内耳道に異常は？
+
+【画像所見】
+
+中脳右側や右側脳室前角周囲白質に，梗塞・虚血変化が疑われるFLAIR像微小高信号(+)　症状の原因病変とは限りません
+また左右の内耳道・小脳橋角部には腫瘍等の占拠性病変像を認めません
+内耳の形態異常も指摘できず
+
+</Finding>
+   <Diagnosis>内耳・内耳道病変像指摘できません
+中脳や右側大脳に微小虚血病変の疑い</Diagnosis>
+   <Conclusion></Conclusion>
+   <KeyImage>
+      <Key_Number>1</Key_Number>
+      <Key_Title></Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J134576_KeyImg01.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>2</Key_Number>
+      <Key_Title></Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J134576_KeyImg02.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>3</Key_Number>
+      <Key_Title></Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J134576_KeyImg03.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>4</Key_Number>
+      <Key_Title>頭部</Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J134576_KeyImg04.jpg</Key_File>
+   </KeyImage>
+</Report>

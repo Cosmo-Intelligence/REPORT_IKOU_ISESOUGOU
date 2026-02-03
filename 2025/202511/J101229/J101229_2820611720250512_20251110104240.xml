@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Report>
+   <OrderNumber>J101229</OrderNumber>
+   <AccessionNumber>2820611720250512</AccessionNumber>
+   <StudyinstanceUID>1.2.392.200001.2.3.5.778.4.99.4.2820611720250512</StudyinstanceUID>
+   <OrderDateTime>2025/05/12 10:33:10</OrderDateTime>
+   <ReferringDepartmentName>耳鼻咽喉科</ReferringDepartmentName>
+   <ReferringPhysician>ああ　ああ</ReferringPhysician>
+   <ClinicalInformation>単純</ClinicalInformation>
+   <StudyInformation>令和1年7月に甲状腺乳頭癌に対して全摘と左頚部郭清
+を施行
+エコーで頚部リンパ節腫大なし
+血清サイログロブリン上昇なし
+肺転移は？</StudyInformation>
+   <StudyPointTime>2025/11/10 9:17:00</StudyPointTime>
+   <Modality>CT</Modality>
+   <BodyPart>頚部～胸部</BodyPart>
+   <HospitalWard>外来</HospitalWard>
+   <OperatorName>施行者:いい　いい</OperatorName>
+   <OperatorComment></OperatorComment>
+   <Patient>
+      <PatientID>0099999998</PatientID>
+      <PatientName>SUZUKI HANAKO</PatientName>
+      <PatientKana>ウウウ　ウウウ</PatientKana>
+      <PatientKanji>ううう　ううう</PatientKanji>
+      <PatientSex>1</PatientSex>
+      <PatientBirthDate>2003/05/22</PatientBirthDate>
+      <PatientStatus>1</PatientStatus>
+   </Patient>
+   <Study>
+      <StudyDateTime>2025/11/10 09:40:00</StudyDateTime>
+      <StudyDescription>単純</StudyDescription>
+   </Study>
+   <DiagnosingUser>ええ ええ</DiagnosingUser>
+   <DiagnosedDateTime>2025/11/10 09:40:10</DiagnosedDateTime>
+   <RevisingUser></RevisingUser>
+   <RevCloseDateTime></RevCloseDateTime>
+   <ApprovingUser>ええ ええ</ApprovingUser>
+   <ApprovedDateTime>2025/11/10 09:40:10</ApprovedDateTime>
+   <Finding>【臨床診断】　令和1年7月に甲状腺乳頭癌に対して全摘と左頚部郭清を施行　エコーで頚部リンパ節腫大なし　血清サイログロブリン上昇なし　肺転移は？
+
+【画像所見】
+
+頚部：転移を疑うリンパ節腫大(-)
+肺：左下葉胸膜の小結節像は前回3年前と比べわずかに増大疑われるが，良性病変の可能性が高いと思います　他転移を疑うSOL出現(-)
+縦隔：異常(-)
+
+脂肪肝出現あり</Finding>
+   <Diagnosis>明らかな転移像を認めません</Diagnosis>
+   <Conclusion></Conclusion>
+   <KeyImage>
+      <Key_Number>1</Key_Number>
+      <Key_Title>胸部</Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J101229_KeyImg01.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>2</Key_Number>
+      <Key_Title>胸部</Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J101229_KeyImg02.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>3</Key_Number>
+      <Key_Title>胸部</Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J101229_KeyImg03.jpg</Key_File>
+   </KeyImage>
+   <KeyImage>
+      <Key_Number>4</Key_Number>
+      <Key_Title></Key_Title>
+      <Key_Type>KeyImage</Key_Type>
+      <Key_File>J101229_KeyImg04.jpg</Key_File>
+   </KeyImage>
+</Report>
