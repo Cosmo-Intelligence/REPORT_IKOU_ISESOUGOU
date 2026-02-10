@@ -393,8 +393,8 @@ namespace DataMigration_Report
                 cmd.BindByName = true;
 
                 //日付形式確認用フォーマット, 必要時にH:mm:ssも追加可能
-                string[] dateTimeFormats = { "yyyy/MM/dd HH:mm:ss" };//,"yyyy/MM/dd H:mm:ss"
-                string[] dateFormat = { "yyyy/MM/dd" };
+                string[] dateTimeFormats = {"yyyy/MM/dd HH:mm:ss","yyyy/MM/dd H:mm:ss"};
+                string[] dateFormat = {"yyyy/MM/dd"};
 
                 cmd.Parameters.Add("OrderNumber", OracleDbType.Varchar2).Value = xDoc.Root.Element("OrderNumber")?.Value ?? "";
                 cmd.Parameters.Add("AccessionNumber", OracleDbType.Varchar2).Value = xDoc.Root.Element("AccessionNumber")?.Value ?? "";
