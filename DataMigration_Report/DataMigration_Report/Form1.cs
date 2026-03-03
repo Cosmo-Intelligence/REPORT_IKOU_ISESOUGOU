@@ -169,7 +169,7 @@ namespace DataMigration_Report
                                 "StudyInformation",
                                 "StudyPointTime",
                                 "Modality",
-                                "BodyPart",
+                                "BodyPartName",
                                 "HospitalWard",
                                 "OperatorName",
                                 "OperatorComment",
@@ -187,17 +187,12 @@ namespace DataMigration_Report
                                 "DiagnosingUser",
                                 "DiagnosedDateTime",
                                 "RevisingUser",
-                                "RevCloseDateTime",
+                                "RevClosedDateTime",
                                 "ApprovingUser",
                                 "ApprovedDateTime",
                                 "Finding",
                                 "Diagnosis",
-                                "Conclusion",
-                                "KeyImage",
-                                "Key_Number",
-                                "Key_Title",
-                                "Key_Type",
-                                "Key_File",
+                                "Conclusion"
                             };
 
                                 foreach (var nodeName in requiredNodes)
@@ -322,7 +317,7 @@ namespace DataMigration_Report
         //XMLファイルから一次テーブルに保存
         private void executeMerge(OracleConnection conn, OracleTransaction trans, XDocument xDoc)
         {
-
+            //REV1
             var keyImages = xDoc.XPathSelectElements("//KeyImage").ToList();
             StringBuilder updateKeys = new StringBuilder();
             StringBuilder insertKeysCols = new StringBuilder();
@@ -393,8 +388,8 @@ namespace DataMigration_Report
                 cmd.BindByName = true;
 
                 //日付形式確認用フォーマット, 必要時にH:mm:ssも追加可能
-                string[] dateTimeFormats = {"yyyy/MM/dd HH:mm:ss","yyyy/MM/dd H:mm:ss"};
-                string[] dateFormat = {"yyyy/MM/dd"};
+                string[] dateTimeFormats = { "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd H:mm:ss" };
+                string[] dateFormat = { "yyyy/MM/dd" };
 
                 cmd.Parameters.Add("OrderNumber", OracleDbType.Varchar2).Value = xDoc.Root.Element("OrderNumber")?.Value ?? "";
                 cmd.Parameters.Add("AccessionNumber", OracleDbType.Varchar2).Value = xDoc.Root.Element("AccessionNumber")?.Value ?? "";
@@ -406,7 +401,8 @@ namespace DataMigration_Report
                 cmd.Parameters.Add("StudyInformation", OracleDbType.Varchar2).Value = xDoc.Root.Element("StudyInformation")?.Value ?? "";
                 cmd.Parameters.Add("StudyPointTime", OracleDbType.Varchar2).Value = GetValidDateString(xDoc.Root.Element("StudyPointTime")?.Value, dateTimeFormats, "StudyPointTime");
                 cmd.Parameters.Add("Modality", OracleDbType.Varchar2).Value = xDoc.Root.Element("Modality")?.Value ?? "";
-                cmd.Parameters.Add("BodyPart", OracleDbType.Varchar2).Value = xDoc.Root.Element("BodyPart")?.Value ?? "";
+                //REV1
+                cmd.Parameters.Add("BodyPart", OracleDbType.Varchar2).Value = xDoc.Root.Element("BodyPartName")?.Value ?? "";
                 cmd.Parameters.Add("HospitalWard", OracleDbType.Varchar2).Value = xDoc.Root.Element("HospitalWard")?.Value ?? "";
                 cmd.Parameters.Add("OperatorName", OracleDbType.Varchar2).Value = xDoc.Root.Element("OperatorName")?.Value ?? "";
                 cmd.Parameters.Add("OperatorComment", OracleDbType.Varchar2).Value = xDoc.Root.Element("OperatorComment")?.Value ?? "";
@@ -423,7 +419,8 @@ namespace DataMigration_Report
                 cmd.Parameters.Add("DiagnosingUser", OracleDbType.Varchar2).Value = xDoc.Root.Element("DiagnosingUser")?.Value ?? "";
                 cmd.Parameters.Add("DiagnosedDateTime", OracleDbType.Varchar2).Value = GetValidDateString(xDoc.Root.Element("DiagnosedDateTime")?.Value, dateTimeFormats, "DiagnosedDateTime");
                 cmd.Parameters.Add("RevisingUser", OracleDbType.Varchar2).Value = xDoc.Root.Element("RevisingUser")?.Value ?? "";
-                cmd.Parameters.Add("RevCloseDateTime", OracleDbType.Varchar2).Value = GetValidDateString(xDoc.Root.Element("RevCloseDateTime")?.Value, dateTimeFormats, "RevCloseDateTime");
+                //REV1
+                cmd.Parameters.Add("RevCloseDateTime", OracleDbType.Varchar2).Value = GetValidDateString(xDoc.Root.Element("RevClosedDateTime")?.Value, dateTimeFormats, "RevClosedDateTime");
                 cmd.Parameters.Add("ApprovingUser", OracleDbType.Varchar2).Value = xDoc.Root.Element("ApprovingUser")?.Value ?? "";
                 cmd.Parameters.Add("ApprovedDateTime", OracleDbType.Varchar2).Value = GetValidDateString(xDoc.Root.Element("ApprovedDateTime")?.Value, dateTimeFormats, "ApprovedDateTime");
                 cmd.Parameters.Add("Finding", OracleDbType.Varchar2).Value = xDoc.Root.Element("Finding")?.Value ?? "";
@@ -474,7 +471,9 @@ namespace DataMigration_Report
                 }
                 else
                 {
-                    whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    //2026.3.3 cosmo mod
+                    //whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    whereClause = "TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
                 }
 
                 string connString = $"User Id={dbUserId};Password={dbPassword};Data Source={dbSource};";
@@ -528,7 +527,9 @@ namespace DataMigration_Report
                 }
                 else
                 {
-                    whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    //2026.3.3 cosmo mod
+                    //whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyateTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    whereClause = "TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
                 }
 
                 string connString = $"User Id={dbUserId};Password={dbPassword};Data Source={dbSource};";
@@ -685,7 +686,8 @@ namespace DataMigration_Report
                 }
                 else
                 {
-                    whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    //whereClause = "TO_DATE(StudyDateTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
+                    whereClause = "TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') >= :fromDate AND TO_DATE(StudyPointTime, 'YYYY/MM/DD HH24:MI:SS') < :toDate";
                 }
 
                 AppendLog($"移行開始：{dateMode}：{fromDate}～{toDate}", "INFO");
@@ -776,7 +778,8 @@ namespace DataMigration_Report
                                             source.PatientKana,
                                             source.PatientKanji,
                                             CASE source.PatientSex WHEN '1' THEN 'M' WHEN '2' THEN 'F' ELSE '' END,
-                                            TO_DATE(source.PatientBirthDate, 'YYYY/MM/DD'), source.PatientStatus,
+                                            TO_DATE(source.PatientBirthDate, 'YYYY/MM/DD'),
+                                            source.PatientStatus,
                                             1)";
 
                                 using (OracleCommand cmd = new OracleCommand(sqlPatient, conn))
@@ -837,7 +840,7 @@ namespace DataMigration_Report
                                             target.KENSAHOUHOU = source.StudyDescription,
                                             target.AGE = TRUNC(MONTHS_BETWEEN(TO_DATE(source.StudyPointTime, 'YYYY/MM/DD HH24:MI:SS'), TO_DATE(source.PatientBirthDate, 'YYYY/MM/DD')) / 12),
                                             target.HSPID = 1,
-                                            target.STATUS = CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END,
+                                            target.STATUS = CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END,
                                             target.CALCULATEFLAG = 0,
                                             target.DISPREMOTESTATUS = -1,
                                             target.ALLOCATIONOMITFLAG = 0
@@ -872,7 +875,7 @@ namespace DataMigration_Report
                                             source.StudyDescription,
                                             TRUNC(MONTHS_BETWEEN(TO_DATE(source.StudyPointTime, 'YYYY/MM/DD HH24:MI:SS'), TO_DATE(source.PatientBirthDate, 'YYYY/MM/DD')) / 12),
                                             1,
-                                            CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END,
+                                            CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END,
                                             0,
                                             -1,
                                             0)";
@@ -952,28 +955,28 @@ namespace DataMigration_Report
                                     ON (target.ID = 'IO' || source.OrderNumber)
                                     WHEN MATCHED THEN
                                         UPDATE SET
-                                            target.DRAWDOCTOR = '/' || source.DiagnosingUser || '/' || CASE WHEN source.RevisingUser IS NOT NULL THEN source.RevisingUser || '/' ELSE '' END,
+                                            target.DRAWDOCTOR = '/' || source.DiagnosingUser || '/' || CASE WHEN source.RevisingUser IS NOT NULL AND source.RevisingUser <> source.DiagnosingUser THEN source.RevisingUser || '/' ELSE '' END,
                                             target.DRAWDATE = CASE WHEN source.RevCloseDateTime IS NOT NULL THEN TO_DATE(source.RevCloseDateTime, 'YYYY/MM/DD HH24:MI:SS') ELSE TO_DATE(source.DiagnosedDateTime, 'YYYY/MM/DD HH24:MI:SS') END,
-                                            target.FIXDOCTOR = CASE WHEN source.RevisingUser <> source.ApprovingUser THEN '/' || source.RevisingUser || '/' || source.ApprovingUser || '/' ELSE '/' || source.ApprovingUser || '/' END,
+                                            target.FIXDOCTOR = CASE WHEN source.ApprovingUser IS NULL THEN (CASE WHEN source.RevisingUser IS NOT NULL THEN '/' || source.RevisingUser || '/' ELSE NULL END) ELSE (CASE WHEN source.RevisingUser IS NOT NULL AND source.RevisingUser <> source.ApprovingUser THEN '/' || source.RevisingUser || '/' || source.ApprovingUser || '/' ELSE '/' || source.ApprovingUser || '/' END) END,
                                             target.FIXDATE = TO_DATE(source.ApprovedDateTime, 'YYYY/MM/DD HH24:MI:SS'),
                                             target.FINDINGS = source.Finding,
                                             target.IMPRESSION = source.Diagnosis,
                                             target.REVISION = 0,
                                             target.SUBREVISION = -1,
-                                            target.STATUS = CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END
+                                            target.STATUS = CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END
                                     WHEN NOT MATCHED THEN
                                         INSERT (ID, DRAWDOCTOR, DRAWDATE, FIXDOCTOR, FIXDATE, FINDINGS, IMPRESSION, REVISION, SUBREVISION, STATUS)
                                         VALUES (
                                             'IO' || source.OrderNumber,
-                                            '/' || source.DiagnosingUser || '/' || CASE WHEN source.RevisingUser IS NOT NULL THEN source.RevisingUser || '/' ELSE '' END,
+                                            '/' || source.DiagnosingUser || '/' || CASE WHEN source.RevisingUser IS NOT NULL AND source.RevisingUser <> source.DiagnosingUser THEN source.RevisingUser || '/' ELSE '' END,
                                             CASE WHEN source.RevCloseDateTime IS NOT NULL THEN TO_DATE(source.RevCloseDateTime, 'YYYY/MM/DD HH24:MI:SS') ELSE TO_DATE(source.DiagnosedDateTime, 'YYYY/MM/DD HH24:MI:SS') END,
-                                            CASE WHEN source.RevisingUser <> source.ApprovingUser THEN '/' || source.RevisingUser || '/' || source.ApprovingUser || '/' ELSE '/' || source.ApprovingUser || '/' END,
+                                            CASE WHEN source.ApprovingUser IS NULL THEN (CASE WHEN source.RevisingUser IS NOT NULL THEN '/' || source.RevisingUser || '/' ELSE NULL END) ELSE (CASE WHEN source.RevisingUser IS NOT NULL AND source.RevisingUser <> source.ApprovingUser THEN '/' || source.RevisingUser || '/' || source.ApprovingUser || '/' ELSE '/' || source.ApprovingUser || '/' END) END,
                                             TO_DATE(source.ApprovedDateTime, 'YYYY/MM/DD HH24:MI:SS'),
                                             source.Finding,
                                             source.Diagnosis,
                                             0,
                                             -1,
-                                            CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END)";
+                                            CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END)";
 
                                 using (OracleCommand cmd = new OracleCommand(sqlReport, conn))
                                 {
@@ -1054,7 +1057,7 @@ namespace DataMigration_Report
                                                 target.IMAGECOMMENT = source.{keyTitleCol},
                                                 target.REVISION = 0,
                                                 target.SUBREVISION = -1,
-                                                target.STATUS =  CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END,
+                                                target.STATUS =  CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END,
                                                 target.FILEPATH = '{keyImagePath}'||'\'||TO_CHAR(TO_DATE(source.StudyDateTime, 'YYYY/MM/DD HH24:MI:SS'), 'YYYYMM') || '\' || source.OrderNumber  || '\',
                                                 target.OTHERSTUDY = -1,
                                                 target.TEMPLATEID = -1,
@@ -1069,7 +1072,7 @@ namespace DataMigration_Report
                                                 source.{keyTitleCol},
                                                 0,
                                                 -1,
-                                                CASE WHEN source.ApprovingUser IS NULL OR source.ApprovedDateTime IS NULL THEN 70 ELSE 90 END,
+                                                CASE WHEN source.ApprovingUser IS NULL THEN 70 ELSE 90 END,
                                                 '{keyImagePath}'||'\'||TO_CHAR(TO_DATE(source.StudyDateTime, 'YYYY/MM/DD HH24:MI:SS'), 'YYYYMM') || '\' || source.OrderNumber  || '\',
                                                 -1,
                                                 -1,
